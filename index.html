@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>My 15th Birthday Invitation</title>
+
+  <!-- METATAGS PARA MINIATURA DE WHATSAPP / SOCIAL MEDIA -->
+  <meta property="og:title" content="My 15th Birthday Invitation">
+  <meta property="og:description" content="You are invited to my 15th Birthday Celebration! Click to view details.">
+  <meta property="og:image" content="miniatura.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="300">
+  <meta property="og:image:height" content="300">
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #FFFFFF;
+      font-family: 'Cinzel', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* MARCO DE CELULAR CON PARALLAX */
+    .mobile-screen {
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      height: 100dvh;
+      position: relative;
+      background-color: #FFFFFF;
+      box-shadow: 0 0 30px rgba(0,0,0,0.15);
+      overflow: hidden;
+    }
+
+    .mobile-screen::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -15%;
+      width: 130%;
+      height: 160%;
+      background-image: url('fondo.jpg');
+      background-size: cover;
+      background-position: top center;
+      background-repeat: no-repeat;
+      z-index: 0;
+      pointer-events: none;
+      transform: translateY(var(--bg-y, 0%));
+      transition: transform 0.15s ease-out;
+      will-change: transform;
+    }
+
+    .invitation-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      background: transparent;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      scroll-behavior: smooth;
+      opacity: 1;
+      visibility: visible;
+      padding-bottom: 50px;
+    }
+
+    .invitation-wrapper::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+    }
+
+    /* BOTÓN FLOTANTE DE MÚSICA */
+    .music-btn {
+      position: absolute;
+      bottom: 25px;
+      right: 20px;
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #BE0E23 0%, #BE0E23 100%);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(190, 14, 35, 0.4);
+      cursor: pointer;
+      z-index: 9;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, transform 0.2s ease, visibility 1s ease;
+    }
+
+    .music-btn.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .music-btn:active {
+      transform: scale(0.9);
+    }
+
+    .music-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    .music-btn.playing svg {
+      animation: pulseMusic 2s infinite linear;
+    }
+
+    @keyframes pulseMusic {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
+
+    /* SECCIONES DE IMÁGENES */
+    .image-section {
+      width: 100%;
+      background-color: transparent;
+      display: block;
+      margin: 0;
+      padding: 0;
+      line-height: 0;
+      position: relative;
+    }
+
+    .image-section img {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 0;
+      padding: 0;
+      filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.03));
+    }
+
+    .ceremonia-container {
+      position: relative;
+      display: block;
+      width: 100%;
+    }
+
+    .map-btn {
+      position: absolute;
+      left: 27.5%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(135deg, #BE0E23 0%, #BE0E23 100%);
+      color: #ffffff;
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 15px rgba(190, 14, 35, 0.35);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      z-index: 5;
+      white-space: nowrap;
+      line-height: normal;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .map-btn svg {
+      width: 11px;
+      height: 11px;
+      fill: #ffffff;
+      flex-shrink: 0;
+    }
+
+    .map-btn:hover, .map-btn:active {
+      transform: translateX(-50%) scale(0.96);
+      box-shadow: 0 6px 18px rgba(190, 14, 35, 0.5);
+    }
+
+    .btn-ceremonia { top: 50.5%; }
+    .btn-recepcion { top: 83.5%; }
+
+    .portada-section {
+      background-color: #FFFFFF;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .portada-section img {
+      transform: scale(1.08);
+      transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+    }
+
+    .portada-section.portada-animada img {
+      transform: scale(1);
+    }
+
+    .papas-section img {
+      opacity: 0;
+      transform: translateY(-25px);
+      transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+      will-change: opacity, transform;
+    }
+    
+    .papas-section.papas-animada img {
+      opacity: 1;
+      transform: translateY(0);
+      animation: papasFloat 5s ease-in-out infinite alternate 1.4s;
+    }
+
+    @keyframes papasFloat {
+      0% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-5px) scale(1.01); }
+      100% { transform: translateY(0px) scale(1); }
+    }
+
+    .fecha-animada {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .fecha-animada.visible-section {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide-left {
+      opacity: 0;
+      transform: translateX(-35px);
+      transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .slide-left.visible-section {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scale-up {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 1s cubic-bezier(0.34, 1.26, 0.64, 1), transform 1s cubic-bezier(0.34, 1.26, 0.64, 1);
+    }
+    .scale-up.visible-section {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-up.visible-section {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* CUENTA REGRESIVA */
+    .countdown-section {
+      background-color: transparent;
+      padding: 35px 15px 45px 15px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .countdown-flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 65px;
+    }
+
+    .countdown-number {
+      font-size: 42px;
+      font-weight: 600;
+      color: #BE0E23;
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .countdown-label {
+      font-size: 15px;
+      color: #BE0E23;
+      font-weight: 600;
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .countdown-divider {
+      font-size: 18px;
+      color: #BE0E23;
+      margin-top: -20px;
+      user-select: none;
+    }
+
+    /* ITINERARIO */
+    .itinerario-section {
+      width: 100%;
+      padding: 35px 22px;
+      background: transparent;
+      line-height: normal;
+    }
+
+    .itinerario-wrapper-inner {
+      max-width: 360px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .itinerario {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+    }
+
+    .itinerario::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      bottom: 15px;
+      left: 75px;
+      width: 2px;
+      background: linear-gradient(180deg, #BE0E23 0%, #BE0E23 100%);
+      z-index: 1;
+    }
+
+    .evento {
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .lado-izq {
+      width: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .lado-izq .icono {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #BE0E23;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(190, 14, 35, 0.15);
+      padding: 8px;
+    }
+
+    .lado-izq .icono img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .punto {
+      width: 12px;
+      height: 12px;
+      background: #BE0E23;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      margin: 0 10px;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 2px #BE0E23;
+    }
+
+    .lado-der {
+      padding-left: 10px;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .lado-der .hora {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #BE0E23;
+      line-height: 1.2;
+      letter-spacing: 0.5px;
+    }
+
+    .lado-der .titulo-evento {
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin-top: 3px;
+      display: block;
+      letter-spacing: 0.5px;
+    }
+
+    /* SOBRE DE BIENVENIDA */
+    .envelope-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #FFFFFF;
+      overflow: hidden;
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .envelope-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-image: url('sobre.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .open.envelope-container {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* ESTILOS DEL FORMULARIO RSVP */
+    .rsvp-container {
+      width: 100%;
+      padding: 10px 20px 40px 20px;
+      background: transparent;
+      font-family: 'Montserrat', sans-serif;
+      color: #B4A07B;
+      line-height: normal;
+    }
+
+    .rsvp-tarjeta {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(190, 14, 35, 0.4);
+      border-radius: 20px;
+      padding: 25px 20px;
+      box-shadow: 0 8px 20px rgba(190, 14, 35, 0.08);
+    }
+
+    .tarjeta-integrante {
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(190, 14, 35, 0.3);
+      border-radius: 15px;
+      padding: 16px;
+      margin-bottom: 15px;
+    }
+
+    .rsvp-container input[type="text"],
+    .rsvp-container select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(190, 14, 35, 0.3);
+      background: #ffffff;
+      outline: none;
+      font-family: 'Montserrat', sans-serif;
+      color: #B4A07B;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .rsvp-container label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #B4A07B;
+    }
+
+    .rsvp-container input[type="text"]::placeholder {
+      color: #B4A07B;
+      opacity: 0.7;
+    }
+
+    .rsvp-container input[type="text"]:focus,
+    .rsvp-container select:focus {
+      border-color: #BE0E23;
+      box-shadow: 0 0 6px rgba(190, 14, 35, 0.3);
+    }
+
+    .boton-rsvp {
+      width: 100%;
+      border: 0;
+      border-radius: 30px;
+      padding: 16px;
+      background: linear-gradient(135deg, #BE0E23 0%, #BE0E23 100%);
+      color: white;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 4px 12px rgba(190, 14, 35, 0.35);
+      outline: none;
+    }
+
+    .boton-rsvp:hover { opacity: 0.95; }
+    .boton-rsvp:disabled { opacity: .6; cursor: not-allowed; }
+
+    .mensaje-rsvp {
+      display: none;
+      text-align: center;
+      margin-top: 10px;
+      padding: 15px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid rgba(190, 14, 35, 0.3);
+      color: #B4A07B;
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    .mensaje-rsvp.visible { display: block; }
+  </style>
+</head>
+
+<body>
+
+<div class="mobile-screen" id="mobileScreen">
+
+    <audio id="bg-music" src="cancion.mp3" loop preload="auto"></audio>
+
+    <!-- BOTÓN REPRODUCTOR DE MÚSICA -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Toggle music">
+        <svg id="musicIcon" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+    </button>
+
+    <div class="invitation-wrapper" id="invitation">
+
+        <!-- 1. PORTADA -->
+        <div class="image-section portada-section" id="portadaSection">
+            <img src="portada.png" alt="Cover">
+        </div>
+
+        <!-- 2. PAPÁS -->
+        <div class="image-section papas-section" id="papasSection">
+            <img src="papas.png" alt="Parents">
+        </div>
+
+        <!-- 3. FECHA -->
+        <div class="image-section fecha-animada reveal-section">
+            <img src="fecha.png" alt="Event Date and Time">
+        </div>
+
+        <!-- 4. CONTADOR -->
+        <div class="countdown-section fade-up reveal-section">
+            <div class="countdown-flex">
+                <div class="countdown-item">
+                    <span id="days" class="countdown-number">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-divider">•</div>
+                <div class="countdown-item">
+                    <span id="hours" class="countdown-number">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-divider">•</div>
+                <div class="countdown-item">
+                    <span id="minutes" class="countdown-number">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-divider">•</div>
+                <div class="countdown-item">
+                    <span id="seconds" class="countdown-number">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. FOTO DE NOVIOS / QUINCEAÑERA -->
+        <div class="image-section scale-up reveal-section">
+            <img src="novios.jpg" alt="Photo">
+        </div>
+
+        <!-- 6. CEREMONIA Y RECEPCIÓN -->
+        <div class="image-section scale-up reveal-section ceremonia-container">
+            <img src="ceremonia.png" alt="Ceremony and Reception">
+            
+            <a href="https://www.google.com/maps/place/Our+Lady+Mother+of+the+Church/@39.8269485,-104.9108895,644m/data=!3m2!1e3!4b1!4m6!3m5!1s0x876c7a75ccdd1691:0xcaa1f1f5ebffd379!8m2!3d39.8269485!4d-104.9108895!16s%2Fg%2F1tlmntr3?entry=ttu&g_ep=EgoyMDI2MTAwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="map-btn btn-ceremonia">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                View Location
+            </a>
+
+            <a href="https://www.google.com/maps/place/Salon+Venecia+inc/@39.8809952,-105.0940809,644m/data=!3m3!1e3!4b1!5s0x876b89637d82f99f:0xb98195085472d020!4m6!3m5!1s0x876c76fa1d434683:0xbeae19d5af3c42fb!8m2!3d39.8809952!4d-105.0940809!16s%2Fg%2F12mkz9q0k?entry=ttu&g_ep=EgoyMDI2MTAwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" class="map-btn btn-recepcion">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                View Location
+            </a>
+        </div>
+
+        <!-- 7. VESTIMENTA -->
+        <div class="image-section slide-left reveal-section">
+            <img src="vestimenta.png" alt="Dress Code">
+        </div>
+
+        <!-- 8. GALERÍA -->
+        <div class="image-section scale-up reveal-section">
+            <img src="galeria.png" alt="Gallery">
+        </div>
+
+        <div class="image-section scale-up reveal-section">
+            <img src="https://i.imgur.com/fBOB4tc.jpeg" alt="Photo 1">
+        </div>
+        <div class="image-section scale-up reveal-section">
+            <img src="https://i.imgur.com/mrvuPj4.jpeg" alt="Photo 2">
+        </div>
+        <div class="image-section scale-up reveal-section">
+            <img src="https://i.imgur.com/rFre1i6.jpeg" alt="Photo 3">
+        </div>
+        <div class="image-section scale-up reveal-section">
+            <img src="https://i.imgur.com/dln4s9E.jpeg" alt="Photo 4">
+        </div>
+        <div class="image-section scale-up reveal-section">
+            <img src="https://i.imgur.com/U0QdbQb.jpeg" alt="Photo 5">
+        </div>
+        <div class="image-section scale-up reveal-section">
+            <img src="https://i.imgur.com/k9qztcZ.jpeg" alt="Photo 6">
+        </div>
+
+        <!-- ITINERARIO -->
+        <div class="image-section scale-up reveal-section">
+            <img src="itinerario.png" alt="Itinerary">
+        </div>
+
+        <div class="itinerario-section fade-up reveal-section">
+          <div class="itinerario-wrapper-inner">
+            <div class="itinerario">
+
+              <div class="evento">
+                <div class="lado-izq">
+                  <div class="icono">
+                    <img src="https://i.imgur.com/dui7eE6.png" alt="Mass">
+                  </div>
+                </div>
+                <div class="punto"></div>
+                <div class="lado-der">
+                  <span class="hora">1:00 PM</span>
+                  <strong class="titulo-evento">Mass</strong>
+                </div>
+              </div>
+
+              <div class="evento">
+                <div class="lado-izq">
+                  <div class="icono">
+                    <img src="https://i.imgur.com/5iX5qn7.png" alt="Reception">
+                  </div>
+                </div>
+                <div class="punto"></div>
+                <div class="lado-der">
+                  <span class="hora">5:00 PM</span>
+                  <strong class="titulo-evento">Reception</strong>
+                </div>
+              </div>
+
+              <div class="evento">
+                <div class="lado-izq">
+                  <div class="icono">
+                    <img src="https://i.imgur.com/BzUQM62.png" alt="Dinner">
+                  </div>
+                </div>
+                <div class="punto"></div>
+                <div class="lado-der">
+                  <span class="hora">6:00 - 8:00 PM</span>
+                  <strong class="titulo-evento">Dinner</strong>
+                </div>
+              </div>
+
+              <div class="evento">
+                <div class="lado-izq">
+                  <div class="icono">
+                    <img src="https://i.imgur.com/Tgt4qs6.png" alt="Presentation">
+                  </div>
+                </div>
+                <div class="punto"></div>
+                <div class="lado-der">
+                  <span class="hora">8:00 PM</span>
+                  <strong class="titulo-evento">Presentation</strong>
+                </div>
+              </div>
+
+              <div class="evento">
+                <div class="lado-izq">
+                  <div class="icono">
+                    <img src="https://i.imgur.com/s0xZn2N.png" alt="Waltz">
+                  </div>
+                </div>
+                <div class="punto"></div>
+                <div class="lado-der">
+                  <span class="hora">8:30 PM</span>
+                  <strong class="titulo-evento">Waltz</strong>
+                </div>
+              </div>
+
+              <div class="evento">
+                <div class="lado-izq">
+                  <div class="icono">
+                    <img src="https://i.imgur.com/qb2QFsO.png" alt="Party">
+                  </div>
+                </div>
+                <div class="punto"></div>
+                <div class="lado-der">
+                  <span class="hora">9:00 PM</span>
+                  <strong class="titulo-evento">Party</strong>
+                </div>
+              </div>
+
+              <div class="evento">
+                <div class="lado-izq">
+                  <div class="icono">
+                    <img src="https://i.imgur.com/06wV2Qn.png" alt="End of Event">
+                  </div>
+                </div>
+                <div class="punto"></div>
+                <div class="lado-der">
+                  <span class="hora">1:00 AM</span>
+                  <strong class="titulo-evento">End of Event</strong>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. MESA DE REGALOS -->
+        <div class="image-section scale-up reveal-section">
+            <img src="regalo.png" alt="Gift Registry">
+        </div>
+
+        <!-- 10. TÍTULO DE ASISTENCIA -->
+        <div class="image-section scale-up reveal-section">
+            <img src="asistencia.png" alt="RSVP Confirmation">
+        </div>
+
+        <!-- 11. FORMULARIO RSVP -->
+        <div class="rsvp-container fade-up reveal-section">
+            <div class="rsvp-tarjeta">
+                
+                <div id="formularioCampos">
+                    <div class="tarjeta-integrante">
+                        <label for="nombreCompletoInput">Full Name:</label>
+                        <input type="text" id="nombreCompletoInput" placeholder="e.g. John Smith" autocomplete="off">
+
+                        <label for="confirmarAsistencia">Will you attend?</label>
+                        <select id="confirmarAsistencia" onchange="cambiarAsistencia()">
+                            <option value="Sí" selected>Yes, I will attend</option>
+                            <option value="No">No, I cannot attend</option>
+                        </select>
+
+                        <div id="campoAsistentes">
+                            <label for="numAsistentes">Number of guests:</label>
+                            <select id="numAsistentes">
+                                <option value="1" selected>1 guest</option>
+                                <option value="2">2 guests</option>
+                                <option value="3">3 guests</option>
+                                <option value="4">4 guests</option>
+                                <option value="5">5 guests</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="boton-rsvp" id="botonEnviar" onclick="enviarRegistro()">Confirm RSVP</button>
+                </div>
+
+                <div id="mensaje" class="mensaje-rsvp"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SOBRE DE BIENVENIDA -->
+    <div class="envelope-container" id="envelope">
+        <div class="envelope-card"></div>
+    </div>
+
+</div>
+
+<script>
+    let isOpen = false;
+    const music = document.getElementById("bg-music");
+    const wrapper = document.getElementById("invitation");
+    const envelope = document.getElementById("envelope");
+    const musicBtn = document.getElementById("musicBtn");
+    const musicIcon = document.getElementById("musicIcon");
+    const portadaSection = document.getElementById("portadaSection");
+    const papasSection = document.getElementById("papasSection");
+    const mobileScreen = document.getElementById("mobileScreen");
+
+    const notePath = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
+    const pausePath = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+
+    let ticking = false;
+    wrapper.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const scrollTop = wrapper.scrollTop;
+                const maxScroll = wrapper.scrollHeight - wrapper.clientHeight;
+                if (maxScroll > 0) {
+                    const percentage = scrollTop / maxScroll;
+                    const translateY = percentage * -30; 
+                    mobileScreen.style.setProperty('--bg-y', `${translateY}%`);
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    function openEnvelope() {
+        if (!isOpen) {
+            isOpen = true;
+            wrapper.scrollTop = 0;
+            
+            envelope.classList.add("open");
+            musicBtn.classList.add("visible");
+            
+            portadaSection.classList.add("portada-animada");
+            papasSection.classList.add("papas-animada");
+
+            initScrollAnimations();
+
+            if (music) {
+                var playPromise = music.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        musicBtn.classList.add("playing");
+                        musicIcon.innerHTML = notePath;
+                    }).catch(function(error) {
+                        musicBtn.classList.remove("playing");
+                        musicIcon.innerHTML = pausePath;
+                    });
+                }
+            }
+        }
+    }
+
+    envelope.addEventListener('click', openEnvelope);
+
+    function toggleMusic() {
+        if (music.paused) {
+            music.play();
+            musicBtn.classList.add("playing");
+            musicIcon.innerHTML = notePath;
+        } else {
+            music.pause();
+            musicBtn.classList.remove("playing");
+            musicIcon.innerHTML = pausePath;
+        }
+    }
+
+    function initScrollAnimations() {
+        const revealElements = document.querySelectorAll('.reveal-section');
+        
+        if (!('IntersectionObserver' in window)) {
+            revealElements.forEach(el => el.classList.add('visible-section'));
+            return;
+        }
+
+        const observerOptions = {
+            root: wrapper,
+            rootMargin: '0px 0px -20px 0px',
+            threshold: 0.05
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible-section');
+                }
+            });
+        }, observerOptions);
+
+        revealElements.forEach(el => observer.observe(el));
+    }
+
+    function updateCountdown() {
+        const targetDate = new Date("December 12, 2026 13:00:00").getTime();
+        const now = new Date().getTime();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+            document.getElementById('days').innerText = "00";
+            document.getElementById('hours').innerText = "00";
+            document.getElementById('minutes').innerText = "00";
+            document.getElementById('seconds').innerText = "00";
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = String(days).padStart(2, '0');
+        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    /* COLOCA TU URL DE APPS SCRIPT AQUÍ */
+    const API_URL = "https://script.google.com/macros/s/AKfycbzBiXmk2q6qgGJMhtwU9y2ixYSuXvFU9ClGlOqgJ8dHvmXh_9voTacTPVrp85wECQn4-Q/exec";
+
+    function cambiarAsistencia() {
+      const vaAsistir = document.getElementById('confirmarAsistencia').value;
+      const campoAsistentes = document.getElementById('campoAsistentes');
+      if (vaAsistir === 'Sí') {
+        campoAsistentes.style.display = 'block';
+      } else {
+        campoAsistentes.style.display = 'none';
+      }
+    }
+
+    function llamarAPI(parametros) {
+      return new Promise((resolve, reject) => {
+        const callback = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 9999);
+        const script = document.createElement('script');
+        const query = new URLSearchParams({ ...parametros, callback });
+        const tiempo = setTimeout(() => { limpiar(); reject("Timeout error"); }, 12000);
+
+        window[callback] = function(data) {
+          clearTimeout(tiempo);
+          limpiar();
+          resolve(data);
+        };
+
+        function limpiar() {
+          delete window[callback];
+          if (script.parentNode) script.parentNode.removeChild(script);
+        }
+
+        script.onerror = function() {
+          clearTimeout(tiempo);
+          limpiar();
+          reject("Connection error");
+        };
+
+        script.src = API_URL + '?' + query.toString();
+        document.body.appendChild(script);
+      });
+    }
+
+    async function enviarRegistro() {
+      const boton = document.getElementById('botonEnviar');
+      const nombreInput = document.getElementById('nombreCompletoInput');
+      const nombreVal = nombreInput.value.trim();
+      const asistenciaVal = document.getElementById('confirmarAsistencia').value;
+      let numAsistentesVal = document.getElementById('numAsistentes').value;
+
+      // Ocultar mensajes previos
+      const mensaje = document.getElementById('mensaje');
+      mensaje.className = 'mensaje-rsvp';
+
+      // Validación de al menos 2 palabras (Nombre + Apellido)
+      const palabras = nombreVal.split(/\s+/).filter(word => word.length > 0);
+
+      if (palabras.length < 2) {
+        mostrarMensaje('Please enter your full name (First and Last Name) to continue.');
+        return;
+      }
+
+      if (asistenciaVal === 'No') {
+        numAsistentesVal = 0;
+      }
+
+      boton.disabled = true;
+      boton.textContent = 'Submitting...';
+
+      try {
+        await llamarAPI({
+          action: 'registrarIndividuales',
+          nombre: nombreVal,
+          asistencia: asistenciaVal,
+          asistentes: numAsistentesVal
+        });
+
+        document.getElementById('formularioCampos').style.display = 'none';
+
+        if (asistenciaVal === 'Sí') {
+          mostrarMensaje('Thank you for confirming your attendance!');
+        } else {
+          mostrarMensaje('We are sorry you cannot join us, thank you for letting us know.');
+        }
+
+      } catch (err) {
+        console.error(err);
+        mostrarMensaje('There was an error saving your response. Please try again.');
+        boton.disabled = false;
+        boton.textContent = 'Confirm RSVP';
+      }
+    }
+
+    function mostrarMensaje(texto) {
+      const mensaje = document.getElementById('mensaje');
+      mensaje.className = 'mensaje-rsvp visible';
+      mensaje.textContent = texto;
+    }
+</script>
+
+</body>
+</html>
