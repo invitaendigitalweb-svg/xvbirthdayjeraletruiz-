@@ -793,9 +793,11 @@
                 <div id="formularioCampos">
                     <div class="tarjeta-integrante">
                         <label for="nombreCompletoInput">Full Name:</label>
-                        <input type="text" id="nombreCompletoInput" placeholder="e.g. John Smith" autocomplete="off">
+                        <input type="text" id="nombreCompletoInput" placeholder="e.g. John Smith Perez" autocomplete="off">
 
                         <label for="confirmarAsistencia">Will you attend?</label>
+
+                        <!-- Los valores subyacentes se envían como "Sí" y "No" a Google Sheets -->
                         <select id="confirmarAsistencia" onchange="cambiarAsistencia()">
                             <option value="Sí" selected>Yes, I will attend</option>
                             <option value="No">No, I cannot attend</option>
@@ -955,7 +957,7 @@
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    /* COLOCA TU URL DE APPS SCRIPT AQUÍ */
+    /* URL DE TU GOOGLE APPS SCRIPT */
     const API_URL = "https://script.google.com/macros/s/AKfycbzBiXmk2q6qgGJMhtwU9y2ixYSuXvFU9ClGlOqgJ8dHvmXh_9voTacTPVrp85wECQn4-Q/exec";
 
     function cambiarAsistencia() {
@@ -968,51 +970,22 @@
       }
     }
 
-    function llamarAPI(parametros) {
-      return new Promise((resolve, reject) => {
-        const callback = 'cb_' + Date.now() + '_' + Math.floor(Math.random() * 9999);
-        const script = document.createElement('script');
-        const query = new URLSearchParams({ ...parametros, callback });
-        const tiempo = setTimeout(() => { limpiar(); reject("Timeout error"); }, 12000);
-
-        window[callback] = function(data) {
-          clearTimeout(tiempo);
-          limpiar();
-          resolve(data);
-        };
-
-        function limpiar() {
-          delete window[callback];
-          if (script.parentNode) script.parentNode.removeChild(script);
-        }
-
-        script.onerror = function() {
-          clearTimeout(tiempo);
-          limpiar();
-          reject("Connection error");
-        };
-
-        script.src = API_URL + '?' + query.toString();
-        document.body.appendChild(script);
-      });
-    }
-
     async function enviarRegistro() {
       const boton = document.getElementById('botonEnviar');
       const nombreInput = document.getElementById('nombreCompletoInput');
       const nombreVal = nombreInput.value.trim();
-      const asistenciaVal = document.getElementById('confirmarAsistencia').value;
+      const asistenciaVal = document.getElementById('confirmarAsistencia').value; // 'Sí' o 'No'
       let numAsistentesVal = document.getElementById('numAsistentes').value;
 
       // Ocultar mensajes previos
       const mensaje = document.getElementById('mensaje');
       mensaje.className = 'mensaje-rsvp';
 
-      // Validación de al menos 2 palabras (Nombre + Apellido)
+      // Validación: Mínimo 3 palabras (Nombre + Apellido Paterno + Apellido Materno)
       const palabras = nombreVal.split(/\s+/).filter(word => word.length > 0);
 
-      if (palabras.length < 2) {
-        mostrarMensaje('Please enter your full name (First and Last Name) to continue.');
+      if (palabras.length < 3) {
+        mostrarMensaje('Please enter your full name (First name and both Last names) to continue.');
         return;
       }
 
@@ -1020,16 +993,23 @@
         numAsistentesVal = 0;
       }
 
+      // 1. DESHABILITAR BOTÓN INMEDIATAMENTE
       boton.disabled = true;
       boton.textContent = 'Submitting...';
 
+      // Construcción de la URL con parámetros para Google Apps Script
+      const queryParams = new URLSearchParams({
+        action: 'registrarIndividuales',
+        nombre: nombreVal,
+        asistencia: asistenciaVal,
+        asistentes: numAsistentesVal
+      });
+
+      const fullUrl = `${API_URL}?${queryParams.toString()}`;
+
       try {
-        await llamarAPI({
-          action: 'registrarIndividuales',
-          nombre: nombreVal,
-          asistencia: asistenciaVal,
-          asistentes: numAsistentesVal
-        });
+        // mode: 'no-cors' para envío directo y evitar falsos errores de red
+        await fetch(fullUrl, { mode: 'no-cors' });
 
         document.getElementById('formularioCampos').style.display = 'none';
 
@@ -1040,7 +1020,7 @@
         }
 
       } catch (err) {
-        console.error(err);
+        console.error("Error submitting response:", err);
         mostrarMensaje('There was an error saving your response. Please try again.');
         boton.disabled = false;
         boton.textContent = 'Confirm RSVP';
